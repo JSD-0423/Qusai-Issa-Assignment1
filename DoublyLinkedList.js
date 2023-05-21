@@ -8,7 +8,7 @@ class Node {
 
 
 
-class DoublyLinkedList {
+export class DoublyLinkedList {
 
     constructor(value) {
         this.head = new Node (value);
@@ -120,40 +120,40 @@ class DoublyLinkedList {
         }
     }
 
+    remove(index){
+        let deleteNode = this.get(index);
+        if(index===0){
+            this.head = this.head.next;
+            this.head.previous = null;
+            this.length--;
+        }
+        else if(index === this.length-1){
+            this.tail.previous.next = null;
+            this.tail = this.tail.previous;
+            this.length--;
+        }
+        else if(deleteNode){
+            deleteNode.previous.next =deleteNode.next;
+            deleteNode.next.previous = deleteNode.previous;
+            this.length--;
+        }
+
+
+    }
+
     print(){
         console.log("the length of the list is: "+ this.size);
 
         let current = this.head;
-        while(current){
-            console.log(current.value);
+        let str = "";
+        while(current.next){
+            str += current.value+", ";
             current = current.next;
         }
+        console.log(str+ current.value);
         return true;
     }
 
 
 }
-
-let myDoublyList = new DoublyLinkedList(4);
-myDoublyList.push(5);
-myDoublyList.push(6);
-myDoublyList.push(7);
-
-//myDoublyList.pop();
-//myDoublyList.shift();
-//myDoublyList.pop();
-myDoublyList.unshift(3);
-myDoublyList.unshift(2);
-myDoublyList.unshift(2);
-myDoublyList.shift();
-myDoublyList.set(-1,10);
-
-myDoublyList.insert(0,1);
-myDoublyList.insert(7,8);
-myDoublyList.insert(5,100);
-
-myDoublyList.print();
-
-
-
 
